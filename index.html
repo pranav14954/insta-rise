@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Insta Rise - Order via WhatsApp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f8fa;
+      margin: 0; padding: 0;
+      color: #333;
+    }
+    header {
+      background: #405de6;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    button {
+      background: #405de6;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      font-size: 1.1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #3039b3;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Insta Rise</h1>
+  <p>Order your Instagram followers & views via WhatsApp</p>
+</header>
+
+<div class="container">
+  <form id="orderForm">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="insta">Instagram Username</label>
+    <input type="text" id="insta" name="insta" required />
+
+    <label for="package">Select Package</label>
+    <select id="package" name="package" required>
+      <option value="">-- Select Package --</option>
+      <option value="100 Followers - ₹25">100 Followers - ₹25</option>
+      <option value="500 Followers - ₹80">500 Followers - ₹80</option>
+      <option value="1000 Followers - ₹150">1000 Followers - ₹150</option>
+      <option value="500 Views - ₹3">500 Views - ₹3</option>
+      <option value="1000 Views - ₹5">1000 Views - ₹5</option>
+    </select>
+
+    <button type="submit">Place Order via WhatsApp</button>
+  </form>
+</div>
+
+<script>
+  const whatsappNumber = "919359439116"; // Hidden in JS, not shown on page
+
+  document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = e.target.name.value.trim();
+    const insta = e.target.insta.value.trim();
+    const pack = e.target.package.value;
+
+    if (!name || !insta || !pack) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    // Encode message properly for URL
+    const messageLines = [
+      "*New Order from Insta Rise*",
+      "",
+      `*Name:* ${name}`,
+      `*Instagram Username:* @${insta}`,
+      `*Package:* ${pack}`
+    ];
+    const message = encodeURIComponent(messageLines.join('\n'));
+
+    const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+    window.open(url, '_blank');
+  });
+</script>
+
+</body>
+</html>
